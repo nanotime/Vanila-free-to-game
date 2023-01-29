@@ -1,16 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="shortcut icon" href="https://www.freetogame.com/favicon/favicon-32x32.png" type="image/x-icon">
-  <link rel="shortcut icon" href="https://www.freetogame.com/favicon/favicon-16x16.png" type="image/x-icon">
+  <link rel="shortcut icon" href="https://www.freetogame.com/favicon/favicon-32x32.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="https://www.freetogame.com/favicon/favicon-16x16.png" type="image/x-icon" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vanilla free to game</title>
 </head>
 
 <body>
-  <h1>e</h1>
+  <header class="header">
+    <h1>Free to game... remastered (?)</h1>
+
+    <form class="header__search">
+      <div class="grid">
+
+        <details role="list" id="game-search__platform-dropdown">
+          <summary class="contrast" role="button" aria-haspopup="listbox">Platform</summary>
+          <ul role="listbox">
+            <li>
+              <label for="platform_pc">
+                <input type="checkbox" name="platform_pc" id="platform_pc" />
+                PC
+              </label>
+            </li>
+            <li>
+              <label for="platform_browser">
+                <input type="checkbox" name="platform_browser" id="platform_browser" />
+                Browser
+              </label>
+            </li>
+          </ul>
+        </details>
+
+        <!-- Options are injected with JS on main.js -->
+        <details role="list" id="game-search__categories-dropdown">
+          <summary class="contrast" role="button" aria-haspopup="listbox">Categories</summary>
+        </details>
+
+        <button type="submit" class="secondary">Search</button>
+      </div>
+    </form>
+  </header>
+
+  <section class="game-list"></section>
+
+  <main class="game-details"></main>
+
   <script type="module" src="./src/main.js"></script>
 </body>
 
