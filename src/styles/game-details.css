@@ -1,0 +1,68 @@
+.game-details {
+  padding: var(--spacing);
+}
+
+.game-details img {
+  max-width: 365px;
+  border-radius: var(--border-radius);
+}
+
+.main-info__data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.main-info__data h2 {
+  text-align: center;
+}
+
+@media screen and (min-width: 768px) {
+  .game-details {
+    max-width: 95%;
+  }
+
+  .main-info__data h2 {
+    text-align: start;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .game-details {
+    max-width: 98%;
+  }
+
+  .game-details__main-info {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: auto auto;
+    column-gap: 12px;
+    grid-template-areas:
+      'data data data data data data'
+      'meta meta meta reqs reqs reqs';
+  }
+
+  .main-info__data {
+    grid-area: data;
+    flex-direction: row;
+    align-items: start;
+  }
+
+  .main-info__metadata {
+    grid-area: meta;
+    align-self: center;
+  }
+
+  .main-info__reqs {
+    grid-area: reqs;
+    align-self: center;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .game-details {
+    max-width: 100%;
+    padding: 0 3em;
+  }
+}

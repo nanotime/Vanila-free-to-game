@@ -1,3 +1,10 @@
+/**
+ * Create a UL node element with a list of items inside to create a dropdown
+ *
+ * @export
+ * @param {*} { options }
+ * @return {*}
+ */
 export function optionsBuilder({ options }) {
   const ul = document.createElement('ul');
   const fragment = new DocumentFragment();
