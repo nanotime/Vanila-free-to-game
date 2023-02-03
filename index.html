@@ -15,34 +15,20 @@
 
     <form class="header__search">
       <div class="grid">
-        <details role="list" id="game-search__platform-dropdown">
-          <summary class="contrast" role="button" aria-haspopup="listbox">
-            Platform
-          </summary>
-          <ul role="listbox">
-            <li>
-              <label for="platform_pc">
-                <input type="checkbox" name="platform_pc" id="platform_pc" />
-                PC
-              </label>
-            </li>
-            <li>
-              <label for="platform_browser">
-                <input type="checkbox" name="platform_browser" id="platform_browser" />
-                Browser
-              </label>
-            </li>
-          </ul>
-        </details>
+        <select id="platform" name="platform">
+          <option value="" selected>Platform</option>
+          <option value="pc">PC</option>
+          <option value="browser">Browser</option>
+        </select>
 
         <!-- Options are injected with JS on src/header.js -->
         <details role="list" id="game-search__categories-dropdown">
-          <summary class="contrast" role="button" aria-haspopup="listbox">
+          <summary aria-haspopup="listbox">
             Categories
           </summary>
         </details>
 
-        <button type="submit" class="secondary">Search</button>
+        <button type="submit" class="contrast">Search</button>
       </div>
     </form>
   </header>
