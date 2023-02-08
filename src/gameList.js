@@ -5,6 +5,7 @@
  * @property {string} anchor
  * @property {string} title
  * @property {string} description
+ * @property {number} id
  */
 
 /**
@@ -22,16 +23,17 @@ export function renderGameCards(cards) {
  * https://www.freetogame.com/api-doc
  *
  * @export
- * @param {import('./api').Game} data
+ * @param {import('./api').GameItem} data
  * @return {Card}
  */
 export function formatCardData(data) {
   return {
+    id: data.id,
     img: {
       src: data.thumbnail,
       alt: data.short_description,
     },
-    anchor: '#',
+    anchor: '#game-details',
     title: data.title,
     description: data.short_description,
   };
@@ -45,6 +47,7 @@ export function formatCardData(data) {
  * @return {HTMLDivElement}
  */
 export function gameCardBuilder({
+  id,
   img: { src, alt },
   anchor,
   title,
@@ -65,6 +68,7 @@ export function gameCardBuilder({
   img.setAttribute('src', src);
   img.setAttribute('alt', alt);
   overlay.classList.add('img-card__overlay');
+  anchorNode.setAttribute('id', id);
   anchorNode.setAttribute('href', anchor);
 
   // Insertions

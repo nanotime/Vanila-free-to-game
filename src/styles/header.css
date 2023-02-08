@@ -41,6 +41,11 @@ header * {
 
 .header__search {
   width: 100%;
+  padding: var(--spacing);
+}
+
+#game-search__categories-dropdown {
+  z-index: 10;
 }
 
 #game-search__categories-dropdown ul {
@@ -49,9 +54,33 @@ header * {
   overflow-x: hidden;
 }
 
+@media screen and (min-width: 768px) {
+  .header__search {
+    padding: calc(var(--spacing) - 4px);
+  }
+
+  .header__search-controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    gap: 4px;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .header__search-controls {
+    gap: 8px;
+  }
+}
+
 @media screen and (min-width: 1200px) {
   .header__search {
     width: 35em;
+    padding: 0;
+  }
+
+  .header__search-controls {
+    gap: 12px;
   }
 
   .header::before {

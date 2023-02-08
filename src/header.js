@@ -65,7 +65,7 @@ export function createCategoriesDropdown() {
  * Catch SearchForm Data and format it to pass into the API
  *
  * @param {SubmitEvent} ev
- * @return {import('./api').Game[]} Game
+ * @return {import('./api').GameItem[]} Game
  */
 export async function handleForm(ev) {
   ev.preventDefault();
