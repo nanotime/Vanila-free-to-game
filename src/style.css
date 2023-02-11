@@ -1,0 +1,23 @@
+.no-content-list,
+.no-content-details {
+  text-align: center;
+  padding: var(--spacing);
+}
+
+.invisible {
+  display: none;
+}
+
+.icon-close {
+  background-image: var(--icon-close);
+  width: 30px;
+  height: 30px;
+  background-position: center;
+  cursor: pointer;
+}
+
+dialog .icon-close {
+  position: absolute;
+  right: 30px;
+  top: 30px;
+}

@@ -13,7 +13,7 @@
  * @export
  * @param {Card[]} cards
  */
-export function renderGameCards(cards) {
+export async function renderGameCards(cards) {
   const gameList = document.querySelector('.game-list');
   cards.forEach(card => gameList.appendChild(gameCardBuilder(card)));
 }

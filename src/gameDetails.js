@@ -4,23 +4,26 @@
  * @export
  * @param {import('./api').GameDetails} game
  */
-export function renderMainInfo(game) {
-  const mainInfoNode = document.querySelector('.game-details__main-info');
-  // mainGalleryNode = document.querySelector('.game-details__gallery');
+export async function renderMainInfo(game) {
+  const mainInfoNode = document.querySelector('.game-details__main-info'),
+    mainGalleryNode = document.querySelector('.game-details__gallery');
 
   const mainDataNode = buildMainData(game),
     metadataTableNode = buildMetadataTable(game),
-    requirementsTableNode = buildReqsTable(game);
+    requirementsTableNode = buildReqsTable(game),
+    gallery = buildGallery(game);
 
   mainInfoNode.replaceChildren(
     mainDataNode,
     metadataTableNode,
     requirementsTableNode
   );
+
+  mainGalleryNode.replaceChildren(gallery);
 }
 
 /**
- *
+ * Build the main data section
  * @export
  * @param {import('./api').GameDetails} game
  * @return {HTMLDivElement}
@@ -50,7 +53,7 @@ function buildMainData(game) {
 }
 
 /**
- *
+ * Build meta data table
  * @export
  * @param {import('./api').GameDetails} game
  * @return {HTMLTableElement}
@@ -79,13 +82,25 @@ function buildMetadataTable(game) {
 }
 
 /**
- *
+ * Buld requirements table
  * @export
  * @param {import('./api').GameDetails} game
  * @return {HTMLTableElement}
  */
 function buildReqsTable(game) {
-  const tableRows = Object.entries(game.minimum_system_requirements);
+  const placeholder = {
+    os: '--',
+    processor: '--',
+    genre: '--',
+    graphics: '--',
+    storage: '--',
+  };
+
+  let tableRows = Object.entries(placeholder);
+
+  if (game.minimum_system_requirements) {
+    tableRows = Object.entries(game.minimum_system_requirements);
+  }
 
   const tableContainerNode = document.createElement('div');
   const table = buildTable(tableRows);
@@ -94,6 +109,60 @@ function buildReqsTable(game) {
   tableContainerNode.appendChild(table);
 
   return tableContainerNode;
+}
+
+/**
+ * Build the game img gallery
+ *
+ * @export
+ * @param {import('./api').GameDetails} game
+ * @return {HTMLDivElement | null}
+ */
+export function buildGallery(game) {
+  if (!game.screenshots) {
+    return null;
+  }
+
+  const galleryListNode = document.createElement('div'),
+    galleryFragment = new DocumentFragment();
+
+  galleryListNode.classList.add('gallery__list');
+
+  game.screenshots.forEach((item, idx) => {
+    const imgNode = document.createElement('img');
+    imgNode.setAttribute('src', item.image);
+    imgNode.setAttribute('alt', `Screenshot number ${idx} of ${game.title}`);
+    imgNode.classList.add('gallery__item');
+
+    galleryFragment.appendChild(imgNode);
+  });
+
+  galleryListNode.appendChild(galleryFragment);
+
+  return galleryListNode;
+}
+
+/**
+ * Build and push an image into the modal lightbox
+ *
+ * @export
+ * @param {HTMLDialogElement} target
+ * @param {string} url
+ * @param {string} alt
+ */
+export function pushModalImg(target, url, alt) {
+  const oldImg = target.querySelector('img.lightbox-img');
+  const newImg = document.createElement('img');
+
+  newImg.setAttribute('src', url);
+  newImg.setAttribute('alt', alt);
+  newImg.classList.add('lightbox-img');
+
+  if (!oldImg) {
+    target.appendChild(newImg);
+  } else {
+    target.replaceChild(newImg, oldImg);
+  }
 }
 
 /**
@@ -110,11 +179,13 @@ function buildTable(rows, gameTitle) {
 
   rows.forEach(row => {
     const isUrl = row[0] === 'game_url';
+    const nullReplace = row[1] === null ? '--' : row[1];
     const rowTitle = row[0].replace('_', ' ');
+
     const tr = document.createElement('tr'),
       title = document.createTextNode(rowTitle),
       tdTitle = document.createElement('td'),
-      value = document.createTextNode(row[1]),
+      value = document.createTextNode(nullReplace),
       tdValue = document.createElement('td'),
       linkNode = document.createElement('a');
 

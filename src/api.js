@@ -72,7 +72,7 @@ export async function getGames({ tag, platform }) {
     const games = await api.query({ tag, platform }).get('/filter');
     return games;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
 
@@ -88,6 +88,6 @@ export async function getGame(id) {
     const game = await api.query({ id }).get('/game');
     return game;
   } catch (error) {
-    console.log(error);
+    return error;
   }
 }
